@@ -1,0 +1,35 @@
+<!--
+@see magento/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/inc/addCart.html
+-->
+
+<form data-role="tocart-form" data-bind="submit: onSubmit, attr: { action: postParams.action }" method="post">
+
+    <input type="hidden" name="product" data-bind="value: postParams.data.product">
+    <input type="hidden" name="uenc" data-bind="value: postParams.data.uenc">
+    <input type="hidden" name="form_key" data-bind="value: formKey">
+
+    <input type="hidden" data-bind="value: qty" name="qty">
+    <input type="hidden" data-bind="value: qtyTypeValue" name="qtyTypeValue">
+    <input type="hidden" data-bind="value: lineMessageModel().currentMessage()" name="currentMessage">
+    <input type="hidden" data-bind="value: packSize" name="packSize">
+    <input type="hidden" data-bind="value: priceWithoutFormat" name="custom_price">
+
+    <input type="hidden" data-bind="value: freeLine" name="freeLine">
+    <input type="hidden" data-bind="value: mixMatchCode" name="mixMatchCode">
+    <input type="hidden" data-bind="value: originalSku" name="originalSku">
+
+    <button data-bind="enable: isInStock, visible: !isIsSub(), click: addToCartClick"
+            class="action tocart primary"
+            type="submit"
+            title="Add to Cart">
+        <span>Add to Cart</span>
+    </button>
+    <button
+            data-bind="visible: isIsSub, click: addSub"
+            class="btn tocart btn-danger"
+            style="display: none;"
+            type="button"
+            title="View Subs">
+        <span>View Subs</span>
+    </button>
+</form>

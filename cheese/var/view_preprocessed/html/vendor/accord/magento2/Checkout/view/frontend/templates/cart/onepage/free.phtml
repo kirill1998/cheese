@@ -1,0 +1,20 @@
+<?php /** * @var \Accord\Checkout\Block\Free $block */ ?> <?php $mixMatchQualify = $block->getOffersWithFreeProducts(); $count = count($mixMatchQualify); if (!$count) { return; } ?> <div class="popup-free-products" style="display: none;"><h3 style="color: orange; margin-top: -20px; margin-bottom: 25px;"> You have qualified for a Special Offer! (<span id="num_offers">1</span>/<span id="count_offers"><?= $count ?></span>)</h3><?php foreach ($mixMatchQualify as $i => $item) : $offer = $block->getSpecialOfferByCode($item->mixMatchCode); $mixMatchQualify = [ 'mixMatchCode' => $item->mixMatchCode, 'freeQuantity' => $item->freeQuantity, 'freeQuantityType' => $item->freeQuantityType, ]; $offerData = [ 'name' => $offer->getName(), 'time' => $offer->getFormatEndDate(), 'type' => $offer->getFormatType(), 'iType' => $offer->getIncentiveType(), 'whatYouGet' => $offer->getDescriptionReceive(), 'toQualify' => $offer->getDescriptionToQualify(), 'anchorDescription' => $offer->getAnchorDescription(), ]; ?> <div id="free_<?= ($i + 1) ?>" data-bind="scope: 'ko_free_items_<?= $i ?>'" class="block widget block-products-list carusel ac-free" style="width: 100%; display: none;" ><!-- ko template: getTemplate() --><!-- /ko --></div><script type="text/x-magento-init">
+            {
+                "*": {
+                    "Magento_Ui/js/core/app": {
+                        "components": {
+                            "ko_free_items_<?= $i ?>": {
+                                "template": "Accord_Ui/listFree",
+                                "templateItem": "Accord_Ui/itemAjaxFree",
+                                "templateLineMessage": "Accord_Ui/lineMessage",
+                                "component": "Accord_Ui/ko/listFree",
+                                "mixMatchQualify": <?= json_encode($mixMatchQualify) ?>,
+                                "id":<?= $i + 1 ?>,
+                                "data": <?= json_encode(['offerCode' => $offer->getCode()]) ?>,
+                                "controller": "/my-checkout/ajax/free",
+                                "offerData": <?= json_encode($offerData) ?>
+                            }
+                        }
+                    }
+                }
+            }</script><?php endforeach; ?></div>

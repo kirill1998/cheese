@@ -1,0 +1,13 @@
+.admin__control-addon label.admin__addon-prefix {
+    display: none;
+}
+
+.admin__control-addon input.admin__control-text[class*="admin__control-"][class] {
+    border: 1px solid #adadad;
+    border-radius: 1px;
+    color: #303030;
+}
+
+#group-fields-accord-allergens .control {
+    padding-top: 8px;
+}

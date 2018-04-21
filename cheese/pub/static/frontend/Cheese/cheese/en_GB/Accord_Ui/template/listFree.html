@@ -1,0 +1,55 @@
+<!--
+@see magento/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/listFree.html
+-->
+
+<div class="item offer-item">
+    <header class="offer-item__header clearfix">
+        <div class="row">
+            <div class="col-sm-8">
+                <h4 class="offer-name" data-bind="text: offerData.name"></h4>
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="offer-item__content-right_header visible-xs-inline-block" data-bind="text: offerData.iType"></div>
+                    </div>
+                    <div class="col-xs-6 col-sm-12 text-right">
+                        <time class="offer-time" data-bind="text: offerData.time"></time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="offer-item__body clearfix">
+        <div class="row">
+            <div class="col-sm-4 col-sm-push-8 hidden-xs">
+                <div class="offer-item__content-right text-right-sm" data-bind="text:offerData.iType"></div>
+            </div>
+            <div class="col-sm-8 col-sm-pull-4">
+                <div class="offer-item__content">
+                    <p>What You Get: <span data-bind="text: offerData.whatYouGet"></span></p>
+                    <p>To Qualify: <span data-bind="text: offerData.toQualify"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<span class="offerCode" style="display: none" data-bind="text: mixMatchQualify.mixMatchCode"></span>
+
+<h3>
+    Free products (Choose <span data-bind="text: mixMatchQualify.freeQuantity"></span>)
+</h3>
+
+<div class="block-content">
+    <!-- category_page_grid-->
+    <div class="products-carusel carusel">
+        <div data-bind="attr: {id: carouselId}, foreach: items()"
+             class="product-items product-items_custom owl-carousel owl-carousel_custom-hteme js-owl-carousel ac-sub">
+            <div class="product-item">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<!--
+/**
+ * DISCLAIMER
+*
+ * Do not edit or add to this file if you wish to upgrade Smile Elastic Suite to newer
+ * versions in the future.
+*
+*
+ * @category  Smile
+ * @package   Smile\ElasticsuiteCatalog
+ * @author    Romain Ruaud <romain.ruaud@smile.fr>
+ * @copyright 2016 Smile
+ * @license   Open Software License ("OSL") v. 3.0
+*/
+-->
+<dd class="<%- data.row_class %>" id="qs-option-<%- data.index %>" role="option" href="<%- data.url %>">
+    <span class="category-mini-crumb"><%- data.breadcrumb.join(' > ') %></span>
+    <span class="qs-option-name"><%- data.title %></span>
+    <span aria-hidden="true" class="amount"><%- data.num_results %></span>
+</dd>

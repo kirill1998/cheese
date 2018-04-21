@@ -1,0 +1,18 @@
+<?php /** * @var \Accord\Catalog\Block\Product\ProductList\Sub $block */ $_product = $block->getProduct(); ?> <div id="substitutes" data-bind="scope: 'ko_substitutes'" class="block widget block-products-list carusel ac-substitutes"><!-- ko template: getTemplate() --><!-- /ko --></div><?php $data = [ "sku" => $_product->getSku(), ]; /** * @see am2/app/code/Accord/UI/view/frontend/web/ko/substitutes.js * @see am2/app/code/Accord/UI/web/template/substitutes.html * @see am2/app/code/Accord/UI/web/template/item.html */ ?> <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "ko_substitutes": {
+                        "template": "Accord_Ui/list",
+                        "templateItem": "Accord_Ui/itemAjaxSubs",
+                        "templateLineMessage": "Accord_Ui/lineMessage",
+                        "component": "Accord_Ui/ko/listSubs",
+                        "data": <?= json_encode($data) ?>,
+                        "controller": "/categories/ajax/sub",
+                        "title": "Substitutes"
+                    }
+                }
+            }
+        }
+    }</script>

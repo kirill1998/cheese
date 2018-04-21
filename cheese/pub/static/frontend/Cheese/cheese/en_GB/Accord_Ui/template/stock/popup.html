@@ -1,0 +1,60 @@
+<div class="modal__cart-item-wr" data-bind="if: qtySubs">
+    <div class="modal__cart-item-header">
+        <div class="row">
+            <div class="col-sm-8 col-xs-7">
+                <div class="text-danger" data-bind="visible: (qtySubs() == 1)">
+                    <span data-bind="text: qtySubs"></span>
+                    item has substitutes available
+                </div>
+                <div class="text-danger" data-bind="visible: (qtySubs() > 1)">
+                    <span data-bind="text: qtySubs"></span>
+                    items have substitutes available
+                </div>
+            </div>
+            <!--<div class="col-sm-4 col-xs-5">-->
+            <!--<div class="text-right"><a href="">Place Order ></a></div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="modal__cart-item-body" data-bind="foreach: outStockItems()">
+        <!-- ko if: isSubs -->
+        <div class="cart table-wrapper">
+            <!-- ko template: 'Accord_Ui/stock/item' --><!-- /ko -->
+        </div>
+
+        <div data-bind="with: subs">
+            <div class="block widget block-products-list carusel ac-stock">
+                <!-- @see template/list.html -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div class="modal__cart-item-wr" data-bind="if: qtyStock">
+    <div class="modal__cart-item-header">
+        <div class="row">
+            <div class="col-sm-8 col-xs-7">
+                <div class="text-danger" data-bind="visible: (qtyStock() == 1)">
+                    <span data-bind="text: qtyStock"></span>
+                    item has no substitutes available and will be removed from the cart
+                </div>
+                <div class="text-danger" data-bind="visible: (qtyStock() > 1)">
+                    <span data-bind="text: qtyStock"></span>
+                    items have no substitutes available and will be removed from the cart
+                </div>
+            </div>
+            <!--<div class="col-sm-4 col-xs-5">-->
+            <!--<div class="text-right"><a href="">Place Order ></a></div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="modal__cart-item-body">
+        <div class="cart table-wrapper" data-bind="foreach: outStockItems()">
+            <!-- ko ifnot: isSubs -->
+            <!-- ko template: 'Accord_Ui/stock/item' --><!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

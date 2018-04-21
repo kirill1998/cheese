@@ -1,0 +1,27 @@
+<!--
+@see am2/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/lineMessage.html
+-->
+<!-- popup -->
+<div data-bind="
+        popup: {
+            lineMessages: lineMessages,
+            currentMessage: currentMessage
+        }
+    " class="product-item-reviews__wr">
+    <i class="fa fa-comment product-item-reviews" aria-hidden="true" title="Add Message"></i>
+
+    <div class="accord_popup" style="display: none" title="Update Line Message">
+        <p>Please add any additional messages you would like to attach to the order line in the box below.</p>
+        <div class="clearfix">
+            <div class="popup__message-select-wr">
+                <select></select>
+            </div>
+            <div class="popup__message-btn-wr">
+                <button class="btn btn-block btn-primary js-btn-close-popup"
+                        type="button">Add Message
+                </button>
+            </div>
+        </div>
+        <p class="text-warning" data-bind="visible: isWeightedMssage" style="display: none; color: red">Line message required for all weighted items.</p>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="form-group">
+    <div class="input-group js-qty">
+        <span class="input-group-btn">
+            <button
+                    data-bind="enable: isInStock, click: minus"
+                    class="btn btn-primary js-qtyminus"
+                    type="button"
+                    field='qty'>
+                <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+        </span>
+        <input
+            data-bind="
+                value: qty,
+                enable: isInStock,
+                attr: { min: minQty, max: maxQty },
+                hasfocus: true,
+                selectOnFocus: true,
+                event: { keyup: qtyKeyPress }
+            "
+            onkeypress="return event.charCode >= 48"
+            type="number"
+            class="form-control js-field input-text qty"
+            name="qty"
+            title="Qty"
+        />
+        <span class="input-group-btn">
+            <button
+                    data-bind="enable: isInStock, click: plus"
+                    class="btn btn-primary js-qtyplus"
+                    type="button"
+                    field='qty'>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+</div>

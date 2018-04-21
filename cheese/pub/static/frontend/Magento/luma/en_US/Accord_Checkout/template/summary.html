@@ -1,0 +1,6 @@
+<strong data-bind="i18n: 'Summary'" class="summary title"></strong>
+<div class="cart-totals" data-bind="blockLoader: isLoading">
+    <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</div>

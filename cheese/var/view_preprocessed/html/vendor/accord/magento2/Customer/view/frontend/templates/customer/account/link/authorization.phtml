@@ -1,0 +1,12 @@
+<?php /** * Copyright © 2016 Magento. All rights reserved. * See COPYING.txt for license details. */ /** @var $block \Magento\Customer\Block\Account\AuthorizationLink */ $dataPostParam = ''; if ($block->isLoggedIn()) { $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams()); } ?> <li class="authorization-link" data-label="" data-bind="scope: 'sing_in'"><a data-bind="click: singInPopup" <?php /* @escapeNotVerified */ echo $block->getLinkAttributes(); ?><?php /* @escapeNotVerified */ echo $dataPostParam; ?>><?= __('Sign In/Register'); ?></a></li> <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "sing_in": {
+                        "component": "Accord_Ui/ko/signIn"
+                    }
+                }
+            }
+        }
+    }</script>

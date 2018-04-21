@@ -1,0 +1,28 @@
+<div class="form-checkout__body form-horizontal">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-12 control-label control-label_left" data-bind="i18n:'Order Reference:'"></div>
+                <div class="col-sm-12">
+                    <input type="text" data-bind="value: customerRef" class="form-control" name="customer_ref" id="customer_ref"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-12 control-label control-label_left" data-bind="i18n: 'Delivery Date:'"></div>
+                <div class="col-sm-12">
+                    <div class="input-group" data-bind="datepicker: true">
+                        <input class="form-control" type="text" name="delivery-date" id="delivery-date" readonly="true"/>
+                        <span class="input-group-btn">
+                              <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

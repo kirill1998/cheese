@@ -1,0 +1,17 @@
+<div id="substitutes" data-bind="scope: 'ko_substitutes_quick'" class="block widget block-products-list carusel ac-substitutes"><!-- ko template: getTemplate() --><!-- /ko --></div><script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "ko_substitutes_quick": {
+                        "component": "Accord_Quick/ko/listSubs",
+                        "controller": "/categories/ajax/sub",
+                        "template": "Accord_Ui/list",
+                        "templateItem": "Accord_Ui/itemAjaxSubs",
+                        "templateLineMessage": "Accord_Ui/lineMessage",
+                        "title": "Substitutes"
+                    }
+                }
+            }
+        }
+    }</script>

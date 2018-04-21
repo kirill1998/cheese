@@ -1,0 +1,29 @@
+<?php /** * Copyright © 2016 Magento. All rights reserved. * See COPYING.txt for license details. */ /** @var $block \Accord\Catalog\Block\Product\View */ ?> <?php $_product = $block->getProduct(); ?> <?php $_productCustomerData = $block->getProductCustomerData(); ?> <?php if ($_product->isSaleable()): ?> <div class="box-tocart" data-bind="scope: 'product_details_item_component'"><div class="fieldset"><div class="product-view-actions"><div class="clearfix"><?php if ($block->shouldRenderQuantity()): ?> <div class="qty__wr"><!-- ko template: "Accord_Ui/inc/qty"--><!-- /ko --></div><!-- ko template: "Accord_Ui/inc/qtyType"--><!-- /ko --><?php endif; ?> <!-- ko if: isInStock --><button data-bind="enable: isInStock, visible: !isIsSub(), click: addToCartClick, attr: {title: $t('Add to Cart')}" type="submit" class="btn btn-green" id="product-addtocart-button"><span> <!-- ko i18n: 'Add to Cart' --><!-- /ko --></span></button> <!-- /ko --><!-- ko ifnot: isInStock --><button data-bind="enable: isInStock, visible: !isIsSub(), click: addToCartClick, attr: {title: $t('Out of Stock')}" type="submit" class="btn btn-primary" id="product-addtocart-button"><span> <!-- ko i18n: 'Out of Stock' --><!-- /ko --></span></button> <!-- /ko --><button data-bind="visible: isIsSub, click: addSub" class="btn btn-danger" style="display:none;" type="button" title="<?= __('Add Sub') ?>"><span><?= __('Add Sub') ?></span></button></div></div><?php echo $block->getChildBlock('') ?> <input type="hidden" data-bind="value: qty" name="qty"><input type="hidden" data-bind="value: qtyTypeValue" name="qtyTypeValue"><input type="hidden" data-bind="value: priceWithoutFormat" name="custom_price"><input type="hidden" data-bind="value: lineMessageModel().currentMessage()" name="currentMessage"><input type="hidden" data-bind="value: packSize" name="packSize"><div class="product-view-actions__footer"><div class="product-social-links"><div class="product-addto-links" data-bind="with: lineMessageModel()"><!-- ko template: getTemplate() --><!-- /ko --></div><?php echo $block->getChildHtml() ?></div></div></div></div><?php endif; ?> <?php if ($block->isRedirectToCartEnabled()) : ?> <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "Magento_Catalog/product/view/validation": {
+                    "radioCheckboxClosest": ".nested"
+                }
+            }
+        }</script><?php else : ?> <script>
+        require([
+            'jquery',
+            'mage/mage',
+            'Magento_Catalog/product/view/validation',
+            'Magento_Catalog/js/catalog-add-to-cart'
+        ], function ($) {
+            'use strict';
+
+            $('#product_addtocart_form').mage('validation', {
+                radioCheckboxClosest: '.nested',
+                submitHandler: function (form) {
+                    var widget = $(form).catalogAddToCart({
+                        bindSubmit: false
+                    });
+
+                    widget.catalogAddToCart('submitForm', $(form));
+
+                    return false;
+                }
+            });
+        });</script><?php endif; ?>

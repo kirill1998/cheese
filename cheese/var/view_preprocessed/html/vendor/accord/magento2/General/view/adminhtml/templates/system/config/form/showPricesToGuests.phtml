@@ -1,0 +1,17 @@
+<?php /** * @var $block Accord\General\Block\Config\Form\ShowSpecialOffersToGuests */ ?> <input type="hidden" name="<?= $block->getData('name'); ?>" value="0"/><select <?= $block->getData('is_allow_guest') ? '' : ' disabled="disabled" ' ?> id="<?= $block->getData('html_id'); ?>" name="<?= $block->getData('name'); ?>" class="select admin__control-select" data-ui-id="select-groups-catalogue-general-fields-guestoffers-value"><option value="1" <?= $block->getData('value')==1 ? 'selected="selected"' : ''; ?>>Yes</option><option value="0" <?= $block->getData('value')==0 ? 'selected="selected"' : ''; ?>>No</option></select> <script>
+    require([
+        "jquery",
+        "mage/mage",
+        "prototype",
+        "domReady!"
+    ], function(jQuery, registry){
+        jQuery('#accord_catalogue_catalogue_general_allowGuests').change(function () {
+            var self = jQuery(this);
+            if (self.val()) {
+                jQuery('#<?= $block->getData("html_id"); ?>').prop('disabled', false);
+            } else {
+                jQuery('#<?= $block->getData("html_id"); ?>').prop('disabled', true);
+            }
+        });
+
+    });</script>

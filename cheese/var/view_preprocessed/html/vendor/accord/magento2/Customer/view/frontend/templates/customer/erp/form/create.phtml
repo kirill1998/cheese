@@ -1,0 +1,33 @@
+<?php ?> <?php /** * Create erp application form template * * @var $block Accord\Customer\Block\Customer\erp\Form\Register */ ?> <?php echo $block->getChildHtml('form_fields_before') ?> <?php /* Extensions placeholder */ ?> <?php echo $block->getChildHtml('customer.form.register.extra') ?> <div class="page-title-wrapper"><div class="row"><div class="col-sm-12 text-right"><a class="back" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>"><i class="back-icon"></i><span class="sr-only"><?php /* @escapeNotVerified */ echo __('Back') ?></span></a></div></div><h1 class="page-title text-center"><span data-ui-id="page-title-wrapper" class="base"><?= __('Customer Application'); ?></span></h1><form class="" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off"><header class="header-login-customer"><div class="block-title_md"><?= __('Contact Info'); ?></div></header><input type="hidden" name="success_url" value="<?php /* @escapeNotVerified */ echo $block->getSuccessUrl() ?>"><input type="hidden" name="error_url" value="<?php /* @escapeNotVerified */ echo $block->getErrorUrl() ?>"><div class="block-content"><fieldset class="fieldset create info"><div class="row"><div class="col-sm-6"><div class="form-group field required"><label for="firstname" class="label"><span><?= __('First Name'); ?></span></label> <div class="control"><input id="firstname" type="text" name="firstname" value="<?php echo $block->escapeHtml($block->getFormData()->getFirstname()) ?>" title="<?= __('First Name'); ?>" data-validate="{required:true}" class="input-text required-entry validate-ac-alpha-name" autocomplete="off" aria-required="true"></div></div></div><div class="col-sm-6"><div class="form-group field required"><label for="lastname" class="label"><span><?= __('Surname'); ?></span></label> <div class="control"><input id="lastname" type="text" name="lastname" value="<?php echo $block->escapeHtml($block->getFormData()->getLastname()) ?>" title="<?= __('Second Name'); ?>" data-validate="{required:true}" class="input-text required-entry validate-ac-alpha-name" autocomplete="off" aria-required="true"></div></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group field required"><label for="email_address" class="label"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label> <div class="control"><input type="email" name="email" id="email_address" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}"></div></div></div><div class="col-sm-6"><div class="form-group"><label for="ac_phone" class="label"><span><?php /* @escapeNotVerified */ echo __('Contact Number') ?></span></label> <div class="control"><input type="text" name="ac_phone" id="ac_phone" value="<?php echo $block->escapeHtml($block->getFormData()->getAcPhone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" class="input-text validate-ac-phone"/></div></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group field"><label for="company_name" class="label"><span><?php /* @escapeNotVerified */ echo __('Company Name') ?></span></label> <div class="control"><input type="text" name="company_name" id="company_name" value="<?php echo $block->escapeHtml($block->getFormData()->getCompanyName()) ?>" title="<?php /* @escapeNotVerified */ echo __('Company Name') ?>" class="input-text" data-validate="{required:true}" autocomplete="off"></div></div></div></div><div class="row"><div class="col-sm-12"><div class="form-group field"><label for="information" class="label"><span><?php /* @escapeNotVerified */ echo __('Additional Information') ?></span></label> <div class="control"><textarea name="information" id="information" title="<?php /* @escapeNotVerified */
+                                echo __('Information') ?>" class="input-text" data-validate="{}"
+                                          autocomplete="off"><?php echo $block->escapeHtml($block->getFormData()->getInformation()) ?></textarea></div></div></div></div><div class="row block-center-sm"><div class="col-sm-6 text-center-sm"><div class="capcha__wr"><?php echo $block->getChildHtml('form_additional_info'); ?></div></div><div class="col-sm-6"><div class="form-group text-right-sm text-center-sm"><button type="submit" class="btn btn-primary btn-lg btn-w-250 btn-h-74" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>"><span><?php /* @escapeNotVerified */ echo __('Submit') ?></span></button></div></div></div></fieldset></div></form></div><script>
+    require([
+        'jquery',
+        'mage/mage',
+        'jquery/validate', 
+        'mage/translate' 
+    ], function ($) {
+        $.validator.addMethod(
+            "validate-ac-alpha",
+            function (value) {
+                return /^[a-zA-Z]+$/.test(value);
+            },
+            $.mage.__('Only letters are allowed.')
+        );
+        $.validator.addMethod(
+            "validate-ac-alpha-name",
+            function (value) {
+                return /^([a-zA-Z]+)(\b-?[a-zA-Z]+)?$/.test(value);
+            },
+            $.mage.__('Only letters are allowed.')
+        );
+        $.validator.addMethod(
+            "validate-ac-phone",
+            function (value) {
+                return /^\+?[0-9-()]+$/.test(value);
+            },
+            $.mage.__('Please enter a valid phone number.')
+        );
+        var dataForm = $('#form-validate');
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+    });</script>

@@ -1,0 +1,2 @@
+<?php /** * Copyright © 2016 Magento. All rights reserved. * See COPYING.txt for license details. */ ?> <?php /** * Shopping cart template * * @var $block \Magento\Checkout\Block\Cart */ ?> <?php if ($block->getItemsCount()): ?> <?= $block->getChildHtml('with-items'); ?> <script>
+        window.checkoutConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getCheckoutConfig()); ?>;</script><?php else:?> <?= $block->getChildHtml('no-items'); ?> <?php endif; ?>

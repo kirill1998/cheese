@@ -1,0 +1,81 @@
+<!--
+@see am2/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/inc/price.html
+-->
+<div data-bind="if: isShowPrice"
+     data-role="priceBox"
+     class="price-box price-final_price wspList">
+    <span class="price-container price-final_price tax weee">
+        <span class="price-wrapper" data-price-type="finalPrice">
+            <span data-bind="if: priceStrike"
+                  class="price wsp">
+                <span data-bind="html: priceStrike"
+                      class="price-strike">
+                </span>
+                &nbsp;
+                <span data-bind="html: price"
+                      class="price-normal"></span>
+                <!--ko if: isWeighted() -->
+                    <span class="weight-price-inline" data-bind="html: weightUtil"></span>
+                <!--/ko -->
+            </span>
+            <span data-bind="ifnot: priceStrike"
+                  class="price wsp">
+                <span data-bind="html: price"
+                      class="price-normal">
+                </span>
+                <!--ko if: isWeighted() -->
+                    <span class="weight-price-inline" data-bind="html: weightUtil"></span>
+                <!--/ko -->
+            </span>
+        </span>
+
+        <div class="popover-content popover-content_sm-pd" style="display: none">
+            <div class="product-view__additional-prices">
+
+                <!--<div class="product-view__additional-prices-row">-->
+                    <!--Buy <span data-bind="text: $data.case"></span>-->
+                    <!--for <span class="text-danger"><span data-bind="html: $parent.currencySymbol"></span><span-->
+                        <!--data-bind="text: $data.wsp.toFixed(2)"></span></span>-->
+                    <!--each and save <span class="text-success"><span data-bind="text: $data.percentage"></span>%</span>-->
+                <!--</div>-->
+
+                <table class="table table-striped table-lf">
+                    <thead>
+                        <tr>
+                            <th>Cases</th>
+                            <th>Price per Case (Saving)</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: wsps">
+                        <tr>
+                            <td>
+                                <span data-bind="text: $data.case"></span><span data-bind="visible: $data.plus">+</span>
+                            </td>
+                            <td>
+                            <span class="text-danger">
+                                <span data-bind="html: $parent.currencySymbol"></span><span data-bind="text: $data.wsp.toFixed(2)"></span>
+                            </span>
+                            <span class="text-success">
+                                &nbsp;(<span data-bind="text: $data.percentage"></span>% off)
+                            </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+
+        <span tabindex="0"
+              data-bind="visible: visibleWsps, popover: true, popoverOptions: { html: true }"
+              class="ko-popover discount-popup__wr"
+              data-popover-toggle="popover"
+              data-popover-trigger="focus"
+              title="Volume Discounts"
+        >
+            <i class="fa fa-cubes" aria-hidden="true" title="Volume Discounts"></i>
+        </span>
+    </span>
+</div>

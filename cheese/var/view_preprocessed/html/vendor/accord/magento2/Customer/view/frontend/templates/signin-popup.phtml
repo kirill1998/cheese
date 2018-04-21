@@ -1,0 +1,9 @@
+<?php /** * @var \Magento\Customer\Block\Account\AuthenticationPopup $block */ ?> <div id="signInPopup" data-bind="scope:'signInPopup'" style="display: none;"><script>
+        window.signInPopup = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getConfig()); ?>;</script><!-- ko template: getTemplate() --><!-- /ko --><script type="text/x-magento-init">
+        {
+            "#signInPopup": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?> },
+            "*": {
+                "Magento_Ui/js/block-loader": "<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+            }
+        }</script></div>

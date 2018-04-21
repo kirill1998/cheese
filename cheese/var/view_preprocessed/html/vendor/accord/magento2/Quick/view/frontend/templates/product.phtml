@@ -1,0 +1,15 @@
+<?php /** * @var \Accord\Quick\Block\Product $block */ ?> <div data-bind="scope: 'quick_product'" class="quick-product-add"><h3 class="title" data-bind="text: title"></h3><div class="block-content" data-bind="if: (item().isSet)"><div data-bind="with: item" class="product-items product-items_custom ac-quick-product"><div class="product-item"><!-- ko template: getTemplate() --><!-- /ko --></div></div></div></div><script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "quick_product": {
+                        "component": "Accord_Quick/ko/product",
+                        "controller": "/quick_order/ajax/product",
+                        "templateItem": "Accord_Ui/quick/product",
+                        "templateLineMessage": "Accord_Ui/lineMessage"
+                    }
+                }
+            }
+        }
+    }</script>

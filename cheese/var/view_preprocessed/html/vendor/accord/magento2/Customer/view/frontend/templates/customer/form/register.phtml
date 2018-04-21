@@ -1,0 +1,72 @@
+<?php ?> <?php /** * Create account form template * * @var $block Accord\Customer\Block\Customer\Form\Register */ ?> <?php echo $block->getChildHtml('form_fields_before') ?> <?php /* Extensions placeholder */ ?> <?php echo $block->getChildHtml('customer.form.register.extra') ?> <div class="page-title-wrapper"><div class="row"><div class="col-sm-12"><div class="control text-right"><a class="action" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>"><i class="back-icon"></i><span class="sr-only"><?php /* @escapeNotVerified */ echo __('Back') ?></span></a></div></div></div><h1 class="page-title text-center"><span data-ui-id="page-title-wrapper" class="base"><?= __('User Registration'); ?></span></h1><form class="" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off"><?php echo $block->getBlockHtml('formkey'); ?> <input type="hidden" name="success_url" value="<?php /* @escapeNotVerified */ echo $block->getSuccessUrl() ?>"><input type="hidden" name="error_url" value="<?php /* @escapeNotVerified */ echo $block->getErrorUrl() ?>"><div class="block-content"><fieldset class="fieldset create info"><div class="row"><div class="col-sm-6"><div class="form-group field required"><label for="firstname" class="label"><span><?= __('First Name'); ?></span></label> <div class="control"><input id="firstname" type="text" name="firstname" value="<?php echo $block->escapeHtml($block->getFormData()->getFirstname()) ?>" title="<?= __('First Name'); ?>" data-validate="{required:true}" class="input-text required-entry validate-ac-alpha-name" autocomplete="off" aria-required="true"></div></div></div><div class="col-sm-6"><div class="form-group field required"><label for="lastname" class="label"><span><?= __('Surname'); ?></span></label> <div class="control"><input id="lastname" type="text" name="lastname" value="<?php echo $block->escapeHtml($block->getFormData()->getLastname()) ?>" title="<?= __('Second Name'); ?>" data-validate="{required:true}" class="input-text required-entry validate-ac-alpha-name" autocomplete="off" aria-required="true"></div></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group field required"><label for="email_address" class="label"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label> <div class="control"><input type="email" name="email" id="email_address" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}"></div></div></div><div class="col-sm-6"><div class="form-group field required"><label for="email_address_confirmation" class="label"><span><?php /* @escapeNotVerified */ echo __('Confirm Email') ?></span></label> <div class="control"><input type="email" name="email_confirmation" id="email_address_confirmation" value="<?php echo $block->escapeHtml($block->getFormData()->getEmailConfirmation()) ?>" title="<?php /* @escapeNotVerified */ echo __('Confirm Email') ?>" class="input-text" data-validate="{required:true, equalToEmail:'#email_address'}" autocomplete="off"></div></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group password required"><label for="password" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label> <div class="control"><input type="password" name="password" id="password" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" class="input-text" data-validate="{required:true, 'validate-password':true}" autocomplete="off"></div></div></div><div class="col-sm-6"><div class="form-group confirmation required"><label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span></label> <div class="control"><input type="password" name="password_confirmation" title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalToPassword:'#password'}" autocomplete="off"></div></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group required"><label for="ac_phone" class="label"><span><?php /* @escapeNotVerified */ echo __('Contact Number') ?></span></label> <div class="control"><input type="text" name="ac_phone" id="ac_phone" value="<?php echo $block->escapeHtml($block->getFormData()->getAcPhone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" class="input-text validate-ac-phone"></div></div></div></div><div class="row"><div class="col-sm-6"><div class="form-group field"><label for="ac_type" class="label"><span><?php /* @escapeNotVerified */ echo __('User Type') ?></span></label> <div class="control"><select name="ac_type" id="ac_type" title="<?php /* @escapeNotVerified */ echo __('User Type)') ?>" class="input-text" data-validate="{}" autocomplete="off"><option value="<?= Accord\Customer\Helper\Customer\Customer::ACCORD_TYPE_CUSTOMER ?>"><?= __(Accord\Customer\Helper\Customer\Customer::ACCORD_TYPE_CUSTOMER) ?></option><option value="<?= Accord\Customer\Helper\Customer\Customer::ACCORD_TYPE_HEAD_OFFICE ?>"><?= __(Accord\Customer\Helper\Customer\Customer::ACCORD_TYPE_HEAD_OFFICE) ?></option></select></div></div></div><div class="col-sm-6"><div class="form-group field"><label for="ac_code" class="label"><span><?php /* @escapeNotVerified */ echo __('Customer Code (leave blank if unsure)') ?></span></label> <div class="control"><input type="text" name="ac_code" id="ac_code" value="<?php echo $block->escapeHtml($block->getFormData()->getAcCode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Customer Code (leave blank if unsure)') ?>" class="input-text ac-validate-length maximum-length-10" data-validate="{}" autocomplete="off"></div></div></div></div><div class="row block-center-sm"><div class="col-sm-6 text-center-sm"><div class="capcha__wr"><?php echo $block->getChildHtml('form_additional_info'); ?></div></div><div class="col-sm-6"><div class="form-group text-right-sm text-center-sm"><button type="submit" class="btn btn-primary btn-lg btn-w-250 btn-h-74" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>"><span><?php /* @escapeNotVerified */ echo __('Submit') ?></span></button></div></div></div></fieldset></div></form></div><script>
+    require([
+        'jquery',
+        'jquery/validate', 
+        'mage/mage',
+        'mage/translate' 
+    ], function ($) {
+        $.validator.addMethod(
+            'equalToPassword',
+            function (value, el, equalTo) {
+                return !(value != jQuery(equalTo).val());
+            }, $.mage.__('Passwords do not match.'));
+
+        $.validator.addMethod(
+            'equalToEmail',
+            function (value, el, equalTo) {
+                return !(value != jQuery(equalTo).val());
+            }, $.mage.__('Email addresses do not match.'));
+
+        $.validator.addMethod(
+            "validate-ac-alpha",
+            function (value) {
+                return /^[a-zA-Z]+$/.test(value);
+            },
+            $.mage.__('Only letters are allowed.')
+        );
+
+        $.validator.addMethod(
+            "validate-ac-alpha-name",
+            function (value) {
+                return /^([a-zA-Z]+)(\b-?[a-zA-Z]+)?$/.test(value);
+            },
+            $.mage.__('Only letters are allowed.')
+        );
+
+        $.validator.addMethod(
+            "validate-ac-phone",
+            function (value) {
+                return /^\+?[0-9-()]+$/.test(value);
+            },
+            $.mage.__('Please enter a valid phone number.')
+        );
+
+        $.validator.addMethod(
+            "ac-validate-length",
+            function (v, elm) {
+                var reMax = new RegExp(/^maximum-length-[0-9]+$/),
+                    reMin = new RegExp(/^minimum-length-[0-9]+$/),
+                    validator = this,
+                    result = true,
+                    length = 0;
+                $.each(elm.className.split(' '), function (index, name) {
+                    if (name.match(reMax) && result) {
+                        length = name.split('-')[2];
+                        validator.attrLength = length;
+                        result = (v.length <= length);
+                    }
+                    if (name.match(reMin) && result && $.mage.isEmpty(v)) {
+                        length = name.split('-')[2];
+                        result = v.length >= length;
+                    }
+                });
+                return result;
+            }, function () {
+                return $.mage.__("Customer code should be no longer than %1 characters.")
+                    .replace('%1', this.attrLength);
+            }
+        );
+
+        var dataForm = $('#form-validate');
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+    });</script>

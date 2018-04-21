@@ -1,0 +1,207 @@
+<div class="block-authentication"
+     data-bind="afterRender: setModalElement, blockLoader: isLoading"
+     style="display: none">
+    <div class="page-title-wrapper">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('before') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <!--<span data-ui-id="page-title-wrapper"-->
+              <!--class="base text-danger"-->
+              <!--data-bind="i18n: 'To continue to checkout, please login to your account.'">-->
+        <!--</span>-->
+        <div class="messages messages__continue-to-checkout" data-bind="click: hideContinueToCheckoutMessage">
+            <div class="message message-error error">
+                <div data-bind="i18n: isGuestCheckoutAllowed ? 'Please login to your account or click on Continue as Guest' : 'To continue to checkout, please login to your account.'"></div>
+            </div>
+        </div>
+    </div>
+    <div class="page-title-wrapper">
+        <h1 class="page-title text-center"><span data-ui-id="page-title-wrapper" class="base" data-bind="html: storeName"></span></h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <header class="header-login-customer">
+                <div class="block-title_md text-center">Existing Customer?</div>
+            </header>
+            <div class="row">
+                <div class="col-sm-6 login-min-h login-min-h_br-r">
+                    <form class="form form-login"
+                          method="post"
+                          data-bind="submit:login"
+                          id="popup-login-form">
+
+                        <div class="fieldset login" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+                            <div class="form-body">
+                                <div class="form-group field email required">
+                                    <label class="label" for="auth-email"><span data-bind="i18n: 'Email Address'"></span></label>
+                                    <div class="control">
+                                        <input name="username"
+                                               id="auth-email"
+                                               type="email"
+                                               class="input-text"
+                                               data-bind="attr: {autocomplete: autocomplete}"
+                                               data-validate="{required:true, 'validate-email':true}">
+                                    </div>
+                                </div>
+                                <div class="form-group field password required">
+                                    <label for="password" class="label"><span data-bind="i18n: 'Password'"></span></label>
+                                    <div class="control">
+                                        <input name="password"
+                                               type="password"
+                                               class="input-text"
+                                               id="password"
+                                               data-bind="attr: {autocomplete: autocomplete}"
+                                               data-validate="{required:true}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <div class="secondary">
+                                        <a class="action" data-bind="attr: {href: forgotPasswordUrl}">
+                                            <span data-bind="i18n: 'Forgot Your Password?'"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko foreach: getRegion('additional-login-form-fields') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <div class="form-login-footer">
+                                <input name="context" type="hidden" value="checkout" />
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-w-200" name="send" id="send">
+                                        <span data-bind="i18n: 'Login'"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 login-min-h login-min-h_br-r">
+                    <div class="block-content">
+                        <div class="form-group">
+                            <label class="label"><span  data-bind="i18n: 'No user account?'"></span></label>
+                            <p  data-bind="i18n: 'Click below to register as a new user'"></p>
+                        </div>
+                    </div>
+                    <div class="form-login-footer">
+                        <div class="text-center">
+                            <a class="btn btn-lg btn-warning btn-w-200" data-bind="attr: {href: registerUrl}">
+                                <span data-bind="i18n: 'Register'"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <header class="header-new-customer">
+                <div class="block-title_md text-center"  data-bind="i18n: 'New Customers'"></div>
+            </header>
+            <div class="login-min-h">
+                <div class="block-content">
+                    <div class="form-group">
+                        <p data-bind="i18n: 'Interested in joining our growing food retailer community? Please click below to register you intent with us, and our friendly account managers will get in touch with you to get you up and running!'"></p>
+                    </div>
+                </div>
+                <div class="form-login-footer">
+                    <div class="text-center"><a data-bind="attr: {href: registerErpUrl}, i18n: 'Apply'" class="btn btn-lg btn-warning btn-w-200"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" data-bind="if: !currentUser.settings.continueAsGuest && isGuestCheckoutAllowed">
+        <div class="col-sm-12">
+            <div class="popup-spacer">
+                <span class="popup-spacer_title" data-bind="i18n: 'or'"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="guest-block" data-bind="if: !currentUser.settings.continueAsGuest && isGuestCheckoutAllowed">
+        <div class="col-sm-12">
+            <header class="header-new-customer">
+                <div class="block-title_md"  data-bind="i18n: 'Don\'t want to sign up?'"></div>
+            </header>
+            <form method="post"
+                  id="guest-postcode"
+                  data-bind="submit:postcodeValidate, attr: {onsubmit: 'return false;'}">
+                <div class="form-group">
+                    <!-- ko if: isMultipleDepotsAvailable() -->
+                    <p data-bind="i18n: 'Want to order without the hassle of creating an account? Just enter your postcode to get stock information from your local depot.'"></p>
+                    <!-- /ko -->
+                    <!-- ko if: !isMultipleDepotsAvailable() -->
+                    <p data-bind="i18n: 'Want to order without the hassle of creating an account?'"></p>
+                    <!-- /ko -->
+                    <div data-bind="if: isMultipleDepotsAvailable()">
+                        <input type="text"
+                               placeholder="Enter your postcode"
+                               id="postcode"
+                               class="w-66"
+                               name="postcode"
+                               data-validate="{required:true, 'postcodeValidate':true}"
+                        />
+                        <input type="button" id="use-my-location" data-bind="click: useMyLocation, attr: {value: 'Use My Location'}" class="btn"/>
+                        <input type="submit" id="find-depot-btn" data-bind="attr: {value: 'Find'}" class="btn"/>
+                    </div>
+                </div>
+                <input id="isValid" type="hidden">
+            </form>
+        </div>
+    </div>
+    <div class="row" id="nearest-depot-block" style="display: none;" data-bind="if: !currentUser.settings.continueAsGuest && isGuestCheckoutAllowed">
+        <div class="col-sm-12">
+            <header class="header-new-customer">
+                <div class="block-title_md"  data-bind="i18n: 'Don\'t want to sign up?'"></div>
+            </header>
+            <form method="post"
+                  id="nearest-depot"
+                  data-bind="submit:postcodeValidate, attr: {onsubmit: 'return false;'}">
+                <div class="form-group">
+                    <p data-bind="i18n: 'Want to order without the hassle of creating an account? Just enter your postcode to get stock information from your local depot.'"></p>
+                    <input type="text"
+                               placeholder="Enter your postcode"
+                               id="postcode-for-api"
+                               class="w-66"
+                               name="postcode-for-api"
+                               data-validate="{required:true, 'postcodeValidate':true}"
+                        />
+                    <input type="button" id="use-location" data-bind="click: useMyLocation, attr: {value: 'Use My Location'}" class="btn"/>
+                    <input type="submit" id="find-btn" data-bind="attr: {value: 'Find'}" class="btn"/>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-6" id="depot-info">
+                    <span id="depot-name" style="font-size: 1.2em;"></span>
+                    <div class="popup-spacer"></div>
+                    <p id="address1"></p>
+                    <p id="address2"></p>
+                    <p id="address3"></p>
+                    <p id="address4"></p>
+                    <p id="depot-postcode"></p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="google-map" id="depot-location-map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="continue" data-bind="if: !currentUser.settings.continueAsGuest && isGuestCheckoutAllowed">
+        <div class="col-sm-12">
+            <form
+                method="post"
+                id="continue-as-guest"
+                data-bind="submit:continueAsGuestCalculate, attr: {onsubmit: 'return false;'}">
+                <input id="depot-id" type="hidden" value="" name="depot-id">
+                <div class="text-center">
+                    <input type="submit" id="continue-as-guest-btn" data-bind="attr: {value: 'Continue as Guest'}, disable: isMultipleDepotsAvailable()" class="btn btn-lg btn-primary btn-w-250"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

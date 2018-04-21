@@ -1,0 +1,71 @@
+
+<!--
+@see magento/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/itemAjaxSubs.html
+@see magento/lib/web/mage/dataPost.js
+-->
+<!--<div class="product-item">-->
+<div class="product-item-info">
+    <a data-bind="attr: {href: productUrl}, htmlWithBinding: image" class="product-item-photo"></a>
+    <div class="product-item-details">
+        <strong class="product-item-name">
+            <a data-bind="attr: {href: productUrl, title: name}, html: name"
+               class="product-item-link">
+            </a>
+        </strong>
+
+        <!-- size -->
+        <div data-bind="html: packSize"
+             class="ac_size"></div>
+
+        <div class="product-item-actions">
+
+            <div class="clearfix product-item__review-wr">
+                <!-- rating -->
+                <span data-bind="html: summary"></span>
+
+                <div class="actions-secondary" data-role="add-to-links">
+
+                    <!--ko if: addToCompareUrl-->
+                    <a data-bind="attr: {'data-post': comparePostData}"
+                       href="#"
+                       class="action tocompare"
+                       title="Add to Compare">
+                        <span>Add to Compare</span>
+                    </a>
+                    <!--/ko-->
+
+                    <!--ko if: isAllowWishlist-->
+                    <a data-bind="attr: {'data-post': wishlistPostData}"
+                       href="#"
+                       class="action towishlist" data-action="add-to-wishlist"
+                       title="Add to Wish List">
+                        <span>Add to Wish List</span>
+                    </a>
+                    <!--/ko-->
+                </div>
+
+            </div>
+
+            <!-- ko template: "Accord_Ui/inc/price"--><!-- /ko -->
+            <div class="clearfix">
+
+                <!-- qty -->
+                <div class="qty__wr">
+
+                    <!-- ko template: "Accord_Ui/inc/qty"--><!-- /ko -->
+
+                </div>
+
+                <!-- ko template: "Accord_Ui/inc/qtyType"--><!-- /ko -->
+
+
+                <div class="line-message__btn-wr" data-bind="with: lineMessageModel()">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--</div>-->

@@ -1,0 +1,57 @@
+<label class="label" for="postcode-for-getaddress">
+    <span data-bind="i18n: 'Postcode'"></span>
+</label>
+<div class="row">
+    <form
+        method="post"
+        class="form form-shipping-address"
+        id="get-address-form"
+        data-bind="submit:getAddresses, attr: {onsubmit: 'return false;'}">
+        <div class="col-sm-12" style="margin-bottom: 10px;">
+            <input
+                type="text"
+                id="postcode-for-getaddress"
+                name="postcode-for-getaddress"
+                class="col-sm-8"
+                data-validate="{required:true, 'postcodeValidate':true}"
+                data-bind="setPostcode:{}"/>
+            <input
+                type="submit"
+                id="getaddress"
+                class="btn col-sm-4 pull-right"
+                data-bind="attr: {value: 'Find My Address'}">
+            <div class="mage-error hidden" id="bad-request" generated="true">
+                Bad request! Wrong postcode. Try another.
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <select
+                name="addresses-list"
+                id="addresses-list"
+                style="margin-top: 10px;"
+                data-bind="event: {change: fillAddress}">
+            </select>
+        </div>
+    </form>
+</div>
+<form class="form form-shipping-address" id="co-shipping-form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+    <!-- ko foreach: getRegion('before-fields') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <div id="shipping-new-address-form" class="fieldset address">
+        <!-- ko foreach: getRegion('additional-fieldsets') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko if: (isCustomerLoggedIn) -->
+        <div class="field choice" data-bind="visible: !isFormInline">
+            <input type="checkbox" class="checkbox" id="shipping-save-in-address-book" data-bind="checked: saveInAddressBook" />
+            <label class="label" for="shipping-save-in-address-book">
+                <span data-bind="i18n: 'Save in address book'"></span>
+            </label>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: (isCustomerLoggedIn) -->
+        <a href="#" id="guest__validate-shipping-address" class="btn btn-primary hidden" data-bind="click: validateShippingInformation">Validate Address</a>
+        <!-- /ko -->
+    </div>
+</form>

@@ -1,0 +1,46 @@
+.link-style() {
+  a,
+  span,
+  a:visited{
+    color:#000;
+    display: block;
+    margin:5px 0;
+  }
+}
+
+.page-footer {
+  .block.newsletter {
+    width: 25%;
+    padding: 0 30px;
+
+    @media (max-width: @screen-xs-max) {
+      width: 100%;
+    }
+  }
+}
+
+.page-links-wrapper{
+  display: inline;
+
+  .link-style;
+
+  .page-links {
+    min-width: 200px;
+    display: inline-block;
+    margin-bottom: 40px;
+    vertical-align: top;
+
+    .page-links{
+      width: 100%;
+    }
+
+    .parent_page,
+    .parent-cms-page,
+    .parent-external-page,
+    .parent-static-page{
+      margin:10px 0;
+    }
+
+    .link-style;
+  }
+}

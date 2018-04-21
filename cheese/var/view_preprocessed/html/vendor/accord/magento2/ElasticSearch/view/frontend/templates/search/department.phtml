@@ -1,0 +1,10 @@
+<?php /** @var $helperCategory Magento\Catalog\Helper\Category */ /** @var $block \Accord\ElasticSearch\Block\Department */ /** @var \Magento\Framework\Data\Tree\Node\Collection $categories */ $categories = $block->getRootCategories(); $helperCategory = $this->helper('Magento\Catalog\Helper\Category'); ?> <div class="department"><span class='custom-select__holder search-department__check'></span> <select id="search-department" class="js-custom-select" name="cat" title="<?= __('Department'); ?>"><option value="0"><?= __('All') ?></option><?php /** @var \Magento\Framework\Data\Tree\Node $node */ foreach ($categories->getNodes() as $node): if(!$block->canShow($node->getId())){continue;}; ?> <option value="<?= $node->getId()?>" <?= $block->isSelectedCat($node->getId()) ? 'selected="selected"' : ''; ?>><?= $node->getName(); ?></option><?php endforeach; ?></select></div><script type="text/javascript">
+    require(
+        ['jquery'],
+        function ($) {
+            $(".js-custom-select").on('change load', function(){
+                var selectedOption = $(this).find(":selected").text();
+                $(this).siblings(".custom-select__holder").text(selectedOption);
+             }).trigger('change');
+        }
+    );</script>

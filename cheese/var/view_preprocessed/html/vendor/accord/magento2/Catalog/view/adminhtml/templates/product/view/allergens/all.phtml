@@ -1,0 +1,1 @@
+<?php /** * @var array $allergens */ ?> <?php if (empty($allergens)): ?> <?=__('This product does not contain any allergens.')?> <?php else:?> <?php foreach ($allergens as $allergen):?> <div><?=$allergen?></div><?php endforeach;?> <?php endif;?>

@@ -1,0 +1,111 @@
+<div class="block-signin"
+     data-bind="afterRender: setModalElement, blockLoader: isLoading"
+     style="display: none">
+    <div class="page-title-wrapper">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('before') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <!--<span data-ui-id="page-title-wrapper"-->
+              <!--class="base text-danger"-->
+              <!--data-bind="i18n: 'To continue to checkout, please login to your account.'">-->
+        <!--</span>-->
+    </div>
+    <div class="page-title-wrapper">
+        <h1 class="page-title text-center"><span data-ui-id="page-title-wrapper" class="base" data-bind="html: storeName"></span></h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <header class="header-login-customer">
+                <div class="block-title_md text-center">Already a Cheese+ Wholesale Customer?</div>
+            </header>
+            <div class="row">
+                <div class="col-sm-6 login-min-h login-min-h_br-r">
+                    <form class="form form-login"
+                          method="post"
+                          data-bind="submit:login"
+                          id="login-form">
+
+                        <div class="fieldset login" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+                            <div class="form-body">
+                                <div class="form-group field email required">
+                                    <label class="label" for="email"><span data-bind="i18n: 'Email Address'"></span></label>
+                                    <div class="control">
+                                        <input name="username"
+                                               id="email"
+                                               type="email"
+                                               class="input-text"
+                                               data-bind="attr: {autocomplete: autocomplete}"
+                                               data-validate="{required:true, 'validate-email':true}">
+                                    </div>
+                                </div>
+                                <div class="form-group field password required">
+                                    <label for="pass" class="label"><span data-bind="i18n: 'Password'"></span></label>
+                                    <div class="control">
+                                        <input name="password"
+                                               type="password"
+                                               class="input-text"
+                                               id="pass"
+                                               data-bind="attr: {autocomplete: autocomplete}"
+                                               data-validate="{required:true}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <div class="secondary">
+                                        <a class="action" data-bind="attr: {href: forgotPasswordUrl}">
+                                            <span data-bind="i18n: 'Forgot Your Password?'"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko foreach: getRegion('additional-login-form-fields') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <div class="form-login-footer">
+                                <input name="context" type="hidden" value="checkout" />
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-w-200" name="send" id="send2">
+                                        <span data-bind="i18n: 'Login'"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 login-min-h login-min-h_br-r">
+                    <div class="block-content">
+                        <div class="form-group">
+                            <p data-bind="i18n: 'If you would like to place an order and unlock special features such as recent purchase history, offers, your invoices and statements, please click below to register and open your own online account. One of our team will then assign your existing profile to your new account and you will be ready to go!'"></p>
+                        </div>
+                    </div>
+                    <div class="form-login-footer">
+                        <div class="text-center">
+                            <a class="btn btn-lg btn-warning btn-w-200" data-bind="attr: {href: registerUrl}">
+                                <span data-bind="i18n: 'Register'"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <header class="header-new-customer">
+                <div class="block-title_md text-center"  data-bind="i18n: 'New to Cheese+?'"></div>
+            </header>
+            <div class="login-min-h">
+                <div class="block-content">
+                    <div class="form-group">
+                        <p data-bind="html: 'If you are a wholesale business and would like to join our list of happy customers, you can click on the link below, or, if you want to learn more about one of Britain’s leading independent cheese wholesalers, click <a href=\'http://www.cheese-plus.co.uk/about/\'>here</a>. Alternatively, if you would prefer to speak to us, please call and chat to one of our dedicated Account Managers on 01480 831112. We look forward to hearing from you!'"></p>
+                    </div>
+                </div>
+                <div class="form-login-footer">
+                    <div class="text-center"><a data-bind="attr: {href: registerErpUrl}, i18n: 'Apply'" class="btn btn-lg btn-warning btn-w-200"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

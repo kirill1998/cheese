@@ -1,0 +1,339 @@
+<div class="block-title">
+    <strong>
+        <span class="text"><!-- ko i18n: 'My Cart' --><!-- /ko --></span>
+        <span
+                class="qty empty"
+                data-bind="css: { empty: !!getCartParam('summary_count') == false },
+                       attr: { title: $t('Items in Cart') }">
+            <!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+        </span>
+    </strong>
+</div>
+
+<div class="block-content">
+
+    <!-- ko ifnot: getCartParam('summary_count') -->
+    <strong class="subtitle empty" data-bind="visible: closeSidebar()">
+        <!-- ko i18n: 'You have no items in your shopping cart.' --><!-- /ko -->
+    </strong>
+    <!-- ko if: getCartParam('cart_empty_message') -->
+    <p class="minicart empty text"><!-- ko text: getCartParam('cart_empty_message') --><!-- /ko --></p>
+
+    <div class="actions">
+        <div class="secondary">
+            <a class="action viewcart" data-bind="attr: {href: shoppingCartUrl}">
+                <span><!-- ko text: $t('View and edit cart') --><!-- /ko --></span>
+            </a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: getCartParam('summary_count') -->
+    <div class="block-minicart__header">
+        <button type="button"
+                id="btn-minicart-close"
+                class="action close"
+                data-action="close"
+                data-bind="attr: { title: $t('Close') }">
+            <span><!-- ko i18n: 'Close' --><!-- /ko --></span>
+        </button>
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="items-total">
+                    <span class="count" data-bind="text: getCartParam('summary_count')"></span>
+                    <span> Item(s)</span>
+                </div>
+            </div>
+            <div class="col-xs-7 text-right">
+
+                <div class="block-minicart__header-total">
+                    <div class="block-minicart__header-label"><span>Cart Total:</span></div>
+                    <div class="block-minicart__header-value">
+                        <!-- ko if: getCartParam('acTotal') -->
+                            <span class="price-wrapper" data-bind="html: getCartParam('acTotal').orderValueFormat"></span>
+                        <!-- /ko -->
+
+                        <!-- ko ifnot: getCartParam('acTotal') -->
+                            <span class="price-wrapper"><span class="price" data-bind="html: getTotal()"></span></span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix">
+            <!-- ko if: getCartParam('possible_onepage_checkout') -->
+            <button
+                    id="top-cart-btn-checkout"
+                    type="button"
+                    class="btn btn-lg btn-primary btn-block checkout"
+                    data-bind="attr: {title: $t('Go To Checkout')}">
+                <!-- ko i18n: 'Go To Checkout' --><!-- /ko -->
+            </button>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <div data-action="scroll" class="minicart-items-wrapper overflowed">
+        <ol id="mini-cart" class="minicart-items" data-bind="foreach: { data: getCartParam('items'), as: 'item' }">
+            <li class="item product product-item" data-role="product-item">
+                <div class="product">
+                    <!-- ko if: product_has_url -->
+                    <a data-bind="attr: {href: product_url, title: product_name}" tabindex="-1" class="product-item-photo">
+                        <!-- ko foreach: $parent.getRegion('itemImage') -->
+                        <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+                        <!-- /ko -->
+                    </a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: product_has_url -->
+                    <span class="product-item-photo">
+                        <!-- ko foreach: $parent.getRegion('itemImage') -->
+                        <!-- ko template: {name: getTemplate(), data: item.product_image} --><!-- /ko -->
+                        <!-- /ko -->
+                    </span>
+                    <!-- /ko -->
+
+                    <div class="product-item-details">
+                        <div class="product actions">
+                            <!-- ko if: is_visible_in_site_visibility -->
+                            <!--<div class="primary">-->
+                            <!--<a data-bind="attr: {href: configure_url, title: $t('Edit item')}" class="action edit">-->
+                            <!--<span data-bind="i18n: 'Edit'"></span>-->
+                            <!--</a>-->
+                            <!--</div>-->
+                            <!-- /ko -->
+                            <div class="secondary">
+                                <a href="#" data-bind="attr: {'data-cart-item': item_id, title: $t('Remove item')}"
+                                   class="action delete">
+                                    <span data-bind="i18n: 'Remove'"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <strong class="product-item-name">
+                            <!-- ko if: product_has_url -->
+                            <a data-bind="attr: {href: product_url, title: product_name}, text: product_name"></a>
+                            <!-- /ko -->
+                            <!-- ko ifnot: product_has_url -->
+                            <!-- ko text: product_name --><!-- /ko -->
+                            <!-- /ko -->
+                        </strong>
+
+                        <!-- ko if: options.length -->
+                        <div class="product options" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                            <span data-role="title" class="toggle"><!-- ko i18n: 'See Details' --><!-- /ko --></span>
+
+                            <div data-role="content" class="content">
+                                <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
+                                <dl class="product options list">
+                                    <!-- ko foreach: { data: options, as: 'option' } -->
+                                    <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>
+                                    <dd class="values">
+                                        <!-- ko if: Array.isArray(option.value) -->
+                                        <span data-bind="html: option.value.join('<br>')"></span>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: Array.isArray(option.value) -->
+                                        <span data-bind="html: option.value"></span>
+                                        <!-- /ko -->
+                                    </dd>
+                                    <!-- /ko -->
+                                </dl>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <div class="product-item-pricing">
+
+                            <!--ko if: $parent.isHasAccordItem('item-'+item_id) -->
+                                <!-- ko with: $parent.accordItems()['item-'+item_id] -->
+                                <div class="price-container">
+                                    <span class="price-wrapper">
+                                        <span class="price-excluding-tax" data-label="Excl. Tax">
+                                            <span class="minicart-price">
+                                                <span data-bind="html: getCalculatePrice()"></span>
+                                                <!--ko if: isWeighted() -->
+                                                <span class="weight-price-inline" data-bind="html: weightUtil"></span>
+                                                <!--/ko -->
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <!-- /ko -->
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+
+                    <div class="details-qty qty form-inline">
+                        <label class="label" data-bind="i18n: 'Qty', attr: {
+                       for: 'cart-item-'+item_id+'-qty'}"></label>
+                        <div class="minicart-details-qty__form-controls">
+
+                            <!--ko if: $parent.isHasAccordItem('item-'+item_id) -->
+                            <!-- ko with: $parent.accordItems()['item-'+item_id] -->
+                            <input
+                                    data-bind=" value: qty, enable: isInStock,
+                                        attr: {
+                                           id: 'cart-item-'+$parent.item_id+'-qty',
+                                           'data-cart-item': $parent.item_id,
+                                           'data-item-qty': $parent.qty,
+                                           'data-cart-item-id': $parent.product_sku,
+                                           'data-min-qty': minQty,
+                                           'data-max-qty': maxQty,
+                                           'min': minQty, 'max': maxQty
+                                           } "
+                                    type="number"
+                                    name="qty"
+                                    title="Qty"
+                                    size="4"
+                                    class="item-qty cart-item-qty"
+                                    maxlength="12"
+                                />
+                                <!-- ko if: qtyTypeVisible -->
+                                <select data-bind="
+                                        attr: {
+                                            id: 'cart-item-'+$parent.item_id+'-qtyType',
+                                            'data-item-qtyType': $parent.qtyTypeValue,
+                                            'data-cart-item': $parent.item_id,
+                                            'data-cart-item-id': $parent.product_sku,
+                                        },
+                                        enable: qtyTypeEnabled,
+                                        options: qtyTypeOptions,
+                                        value: qtyTypeValue"
+                                        class="form-control select_custom cart-item-type cart-item-qtyType"
+                                        >
+                                </select>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!--ko ifnot: $parent.isHasAccordItem('item-'+item_id) -->
+                                <!-- ko i18n: 'Product is not valid' -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                            <button data-bind="attr: {
+                               id: 'update-cart-item-'+item_id,
+                               'data-cart-item': item_id,
+                               title: $t('Update')
+                               }"
+                                    class="update-cart-item"
+                                    style="display: none">
+                                <span data-bind="i18n: 'Update'"></span>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="details-qty__collaple-wr">
+                        <a role="button" data-toggle="collapse" data-bind="attr: {'href': '#collapseSeeDetails-'+item_id, 'aria-controls': 'collapseSeeDetails-'+item_id  }"  aria-expanded="false" class="details-qty__collaple-btn collapsed">See Details <i aria-hidden="true" class="fa fa-angle-down"></i></a>
+                        <div data-bind="attr: {id: 'collapseSeeDetails-'+item_id}" class="collapse" aria-expanded="false" style="">
+                            <div class="block-minicart__details-row clearfix">
+                                <div class="block-minicart__label"><span>Product Code</span></div>
+                                <div class="block-minicart__value"><span data-bind="text: product_sku"></span></div>
+                            </div>
+                            <!-- ko if: item.packSizeRaw -->
+                            <div class="block-minicart__details-row clearfix">
+                                <div class="block-minicart__label"><span>Pack Size</span></div>
+                                <div class="block-minicart__value">
+                                    <div data-bind="html: item.packSizeRaw" class="ac_size"></div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+
+                            <!-- ko if: item.description -->
+                            <div class="block-minicart__details-row clearfix">
+                                <div class="block-minicart__label"><span>Line Message</span></div>
+                                <div class="block-minicart__value"><span data-bind="text: item.description"></span></div>
+                            </div>
+                            <!-- /ko -->
+
+                            <!--ko if: $parent.isHasAccordItem('item-'+item_id) -->
+                                <!-- ko with: $parent.accordItems()['item-'+item_id] -->
+                                    <!-- ko if: freeLine -->
+                                    <div class="block-minicart__details-row clearfix">
+                                        <div class="block-minicart__label"><span>Free</span></div>
+                                        <div class="block-minicart__value"><span style="color: white" data-bind="text: mixMatchCode"></span></div>
+                                    </div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="block-minicart__footer">
+        <div class="block-minicart__prices-wr">
+            <!-- ko if: getCartParam('acTotal') -->
+
+                <!-- ko if: getCartParam('acTotal').subTotalFormat -->
+                <div class="block-minicart__footer-row clearfix text-primary">
+                    <div class="block-minicart__label"><span data-bind="i18n: 'Subtotal'"></span></div>
+                    <div class="block-minicart__value">
+                        <span class="price-wrapper"
+                              data-bind="html: getCartParam('acTotal').subTotalFormat">
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: getCartParam('acTotal').orderSurchargeValue -->
+                <div class="block-minicart__footer-row clearfix">
+                    <div class="block-minicart__label"><span data-bind="i18n: 'Surcharge' "></span></div>
+                    <div class="block-minicart__value">
+                        <span class="price-wrapper"
+                              data-bind="html: getCartParam('acTotal').orderSurchargeValueFormat">
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: getCartParam('acTotal').orderDiscountValue -->
+                <div class="block-minicart__footer-row clearfix text-danger">
+                    <div class="block-minicart__label"><span data-bind="i18n: 'Discount'"></span></div>
+                    <div class="block-minicart__value">
+                        <span class="price-wrapper"
+                              data-bind="html: getCartParam('acTotal').orderDiscountValueFormat">
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: getCartParam('acTotal').vatValue -->
+                <div class="block-minicart__footer-row clearfix">
+                    <div class="block-minicart__label"><span  data-bind="i18n: 'VAT'"></span></div>
+                    <div class="block-minicart__value">
+                        <span class="price-wrapper"
+                              data-bind="html: getCartParam('acTotal').vatValueFormat">
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: getCartParam('acTotal').orderValue -->
+                <div class="block-minicart__footer-row clearfix block-minicart__footer-row-total">
+                    <div class="block-minicart__label"><span data-bind="i18n: 'Grand Total'"></span></div>
+                    <div class="block-minicart__value">
+                        <span class="price-wrapper"
+                              data-bind="html: getCartParam('acTotal').orderValueFormat">
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+            <!-- /ko -->
+
+        </div>
+
+        <div class="actions">
+            <div class="secondary">
+                <a class="action viewcart" data-bind="attr: {href: shoppingCartUrl}">
+                    <span><!-- ko i18n: 'View and edit cart' --><!-- /ko --></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- /ko -->
+</div>

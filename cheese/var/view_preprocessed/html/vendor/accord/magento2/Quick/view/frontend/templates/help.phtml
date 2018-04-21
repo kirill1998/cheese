@@ -1,0 +1,12 @@
+<?php /** * @var \Accord\Quick\Block\Help $block */ ?> <div class="quick__icon-wr" data-bind="scope: 'quick_help'"><div aria-hidden="true" class="fa fa-question-circle" data-bind="click: showHelp" title="Help"></div></div><div class="popup-quick-help" style="display: none;"><div class="modal-body"><!-- <h2 id="myModalLabel" class="modal-title text-danger" style="margin-top: -26px; margin-bottom: 30px; border-bottom: 0; padding-right: 20px"> Help</h2> --><?php $content = $block->getVideoLink(); ?> <?php if ($content): ?> <div class="video-container"><?= $content ?></div><br/><br/><?php else: ?> <h3 class="quick-title">For quick and easy ordering</h3><ol><li>Enter the SKU or product name in the search box below.</li> <li>Press enter or select the product you want from the list provided.</li> <li>Enter the quantity you want to order.</li> <li>(Optional) Enter a line message for the product.</li> <li>Click or press enter on the "+" button, and the product will be added to the cart.</li> <li>The quick order bar will be cleared for you to quick order your next product.</li> <li>Repeat the steps above until the order is complete, then proceed to the checkout.</li></ol><div class="quick-tip">Tip: Use TAB to quickly switch between fields.</div><?php endif; ?></div></div><script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "quick_help": {
+                        "component": "Accord_Quick/ko/help"
+                    }
+                }
+            }
+        }
+    }</script>

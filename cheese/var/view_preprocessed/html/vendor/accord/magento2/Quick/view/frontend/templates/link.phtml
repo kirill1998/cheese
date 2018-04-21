@@ -1,0 +1,12 @@
+<?php /** * @var \Accord\Quick\Block\Link $block */ ?> <?php if (!$block->isGuestCheckoutAllowed()): if ($block->isLoggedIn()) { ?> <li class="quick-order-link" data-label="Quick order"><a href="/quick_order"><?= __('Quick order'); ?></a></li> <?php }else{ ?> <li class="quick-order-link" data-label="Quick order" data-bind="scope: 'quick_sing_in'"><a data-bind="click: singInPopup" <?= $block->getLinkAttributes(); ?>><?= __('Quick order'); ?></a></li> <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "quick_sing_in": {
+                            "component": "Accord_Ui/ko/signInQuick"
+                        }
+                    }
+                }
+            }
+        }</script><?php } ?> <?php else: ?> <li class="quick-order-link" data-label="Quick order"><a href="/quick_order"><?= __('Quick order'); ?></a></li> <?php endif; ?>

@@ -1,0 +1,20 @@
+<!--
+@see magento/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/list.html
+-->
+<span class="fix_isLoadingQuickSubs" data-bind="visible: isLoading">loading...</span>
+<div class="block-title"
+     data-bind="if: (items().length)">
+    <strong data-bind="text: title"></strong>
+</div>
+<div class="block-content"
+     data-bind="if: (items().length)">
+    <!-- category_page_grid-->
+    <div class="products-carusel carusel">
+        <div data-bind="attr: {id: carouselId}, foreach: items()"
+             class="product-items product-items_custom owl-carousel owl-carousel_custom-hteme js-owl-carousel ac-sub">
+            <div class="product-item">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!--
+@see magento/pub/static/frontend/Magento/luma/en_US/Accord_Ui/template/itemAjaxSubs.html
+@see magento/lib/web/mage/dataPost.js
+-->
+<!--<div class="product-item">-->
+<div class="clearfix">
+
+    <div class="quick-click-name__wr">
+        <div class="quick-head-label quick__product-label">Product Name/SKU</div>
+        <div class="quick-click-name__title">
+          <a data-bind="click: clickName">
+            <span class="sr-only">Close</span>
+          </a>
+          <span class="quick-click-name" data-bind="html: name"></span>
+        </div>
+    </div>
+
+    <div class="product-item-details">
+
+        <div class="quick-qty__wr">
+            <div class="quick-head-label quick__qty-label">Qty</div>
+            <!-- qty -->
+            <div class="qty__wr">
+                <!-- ko template: "Accord_Ui/quick/qty"--><!-- /ko -->
+                <!-- ko template: "Accord_Ui/inc/qtyType"--><!-- /ko -->
+            </div>
+
+            <div class="line-message__btn-wr" data-bind="with: lineMessageModel()">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+
+            <div class="actions-primary">
+                <!-- ko template: "Accord_Ui/quick/addCart"--><!-- /ko -->
+            </div>
+        </div>
+
+
+        <div class="product-item-actions">
+            <div class="quick-head-label quick__price-label">Price</div>
+
+            <!-- ko template: "Accord_Ui/inc/price"--><!-- /ko -->
+        </div>
+
+        <div class="stock-message__wr stock-message__wr-pl">
+            <div class="quick-head-label quick__line-message-label">Stock</div>
+            <div data-bind="attr: { class: (stockType() + ' quick__stock-value') }">
+                <span data-bind="text: stockMessage"></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--</div>-->

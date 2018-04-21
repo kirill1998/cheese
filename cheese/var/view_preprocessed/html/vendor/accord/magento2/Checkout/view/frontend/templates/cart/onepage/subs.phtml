@@ -1,0 +1,15 @@
+<?php /** * @var \Accord\Checkout\Block\Subs $block */ ?> <?php $autoInit = false; if (!$block->checkStock()) { $autoInit = true; } ?> <div class="popup-subs-products" data-bind="scope: 'ko_subs_popup'" style="display: none;"><div class="modal-body"><h2 id="myModalLabel" class="modal-title text-danger" style="margin-top: -26px; margin-bottom: 30px; border-bottom: 0; padding-right: 20px"> Sorry, we’ve found that some items in your cart are out of stock.</h2><div class="page messages"><div data-placeholder="messages"></div><div data-bind="scope: 'messages'"><div data-bind="foreach: { data: cookieMessages, as: 'message' }" class="messages"></div><div data-bind="foreach: { data: messages().messages, as: 'message' }" class="messages"><div data-bind="attr: { class: 'message-' + message.type + ' ' + message.type + ' message', 'data-ui-id': 'message-' + message.type }" class="message-success success message" data-ui-id="message-success"><div data-bind="html: message.text"></div></div></div></div></div><span data-bind="visible: isLoading">loading...</span> <!-- ko template: "Accord_Ui/stock/popup"--><!-- /ko --></div></div><script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "ko_subs_popup": {
+                        "component": "Accord_Ui/ko/stock/popup",
+                        "controller": "/my-checkout/ajax/subs",
+                        "controllerClearStock": "/my-checkout/ajax/clearStock",
+                        "autoInit": "<?= $autoInit ?>"
+                    }
+                }
+            }
+        }
+    }</script>

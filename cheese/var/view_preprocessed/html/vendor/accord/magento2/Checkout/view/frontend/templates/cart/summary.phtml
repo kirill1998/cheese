@@ -1,0 +1,14 @@
+<?php /** * @var \Accord\Checkout\Block\Cart\Page\Summary $block */ /** @var \Accord\Integration\Api\Response\CalculateCart $acCartInformation */ $acCartInformation = $block->getAccordCartInformation(); ?> <div id="cart-totals" class="cart-totals"><div data-bind="scope: 'checkout_summary'"><span data-bind="visible: isLoading">loading...</span> <div class="table-wrapper" data-bind="visible: !isLoading()"><table class="data table totals"><caption class="table-caption"><?= __('Total') ?></caption><tbody><tr class="totals sub"><th class="mark"><strong data-bind="i18n: 'Subtotal'"></strong></th><td class="amount" data-bind="html: subTotal"></td></tr><!-- ko if:surcharge --><tr class="totals sur"><th class="mark"><strong data-bind="i18n: 'Surcharge'"></strong></th><td class="amount" data-bind="html: surcharge"></td></tr><!-- /ko --><!-- ko if:discount --><tr class="totals discount"><th class="mark"><strong data-bind="i18n: 'Discount'"></strong></th><td class="amount text-danger" data-bind="html: discount()"></td></tr><!-- /ko --><!-- ko if:vatValue --><tr class="totals shipping excl"><th scope="row" class="mark"><strong><span class="label" data-bind="i18n: 'VAT'"></span></strong></th><td class="amount" data-bind="html: vatValue"></td></tr><!-- /ko --><tr class="grand totals"><th scope="row" class="mark"><strong data-bind="i18n: 'Grand Total'"></strong></th><td class="amount"><strong data-bind="html: orderValue"></strong></td></tr></tbody></table></div></div><form action="" id="agreements-form"><?= $block->getChildHtml('agreements'); ?></form><ul class="checkout methods items checkout-methods-items"><li class="item"><?= $block->getChildHtml('checkout.cart.methods.onepage.bottom'); ?></li></ul></div><script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "checkout_summary": {
+                        "component": "Accord_Ui/ko/summary",
+                        "controller": "/my-checkout/ajax/summary",
+                        "autoInit": true
+                    }
+                }
+            }
+        }
+    }</script>

@@ -1,0 +1,127 @@
+// /**
+//  * DISCLAIMER
+//  *
+//  * Do not edit or add to this file if you wish to upgrade Smile Elastic Suite to newer
+//  * versions in the future.
+//  *
+//  *
+//  * @category  Smile
+//  * @package   Smile\ElasticsuiteCatalog
+//  * @author    Aurelien FOUCRET <aurelien.foucret@smile.fr>
+//  * @copyright 2016 Smile
+//  * @license   Open Software License ("OSL") v. 3.0
+//  */
+
+
+.elasticsuite-admin-product-sorter {
+
+    margin: 40px 0;
+
+    span.title {
+        font-size: 1.7rem;
+        font-weight: 600;
+        letter-spacing: .025em;
+    }
+
+    .bottom-links {
+        width: 40%;
+        margin: 10px auto;
+        border: 1px solid #cccccc;
+        text-align: center;
+
+        a.show-more-link {
+            padding: 15px 10px;
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .admin__data-grid-loading-mask {
+        position: fixed;
+    }
+
+    .elasticsuite-admin-product-sorter-empty {
+        margin: 20px 100px 20px 100px;
+    }
+
+    .product-list {
+
+        margin: 20px 40px 0;
+
+        li.product-list-item, li.product-list-item-placeholder {
+
+            display: inline-block;
+            border: 1px solid #d6d6d6;
+            width: 200px;
+            margin: 5px;
+            vertical-align: top;
+            list-style-type: none;
+
+            h1 {
+                font-size: 1.2em;
+                font-weight: 600;
+                line-height: 1.9em;
+                margin: 0 0 2px;
+
+                span {
+                    width: 170px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: block;
+                }
+            }
+
+            .info {
+                position: relative;
+                background: rgba(44,44,44, 0.75);
+                width: 100%;
+                margin-top: -31px;
+                color: #FFF;
+                padding: 4px;
+
+                p {
+                    display: inline-block;
+                    font-weight: 600;
+                    margin: 0 10px;
+                }
+
+                p.stock {
+                    float: right;
+                }
+            }
+
+            .draggable-handle {
+                &:extend(.abs-draggable-handle all);
+                padding: 0;
+                float: left;
+                margin: 3px 0 0 0;
+            }
+
+
+            div.product-image {
+                text-align: center;
+                width: 100%;
+                height: 150px;
+
+                img {
+                    max-width: 150px;
+                    max-height: 150px;
+                }
+            }
+        }
+
+        .admin__actions-switch {
+            margin: 10px;
+            font-weight: bold;
+            color: #666666;
+        }
+
+        li.product-list-item.automatic-sorting {
+            .draggable-handle::before {
+                opacity: 0;
+                cursor: default;
+            }
+        }
+    }
+}

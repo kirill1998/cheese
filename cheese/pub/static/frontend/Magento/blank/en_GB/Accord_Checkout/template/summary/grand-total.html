@@ -1,0 +1,21 @@
+<!-- ko if: isDisplayed() -->
+<tr class="grand totals">
+    <td class="mark"><strong data-bind="text: title"></strong></td>
+    <td class="amount">
+        <strong>
+            <span data-bind ="text: getValue(), attr:{'data-label': title}"></span>
+        </strong>
+        <!-- ko foreach: elems() -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </td>
+</tr>
+<!-- /ko -->
+<!-- ko if: isBaseGrandTotalDisplayNeeded() && isDisplayed() -->
+<tr class="totals charge">
+    <th class="mark" data-bind="i18n: basicCurrencyMessage" scope="row"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getBaseValue(), attr: {'data-th': basicCurrencyMessage}"></span>
+    </td>
+</tr>
+<!-- /ko -->

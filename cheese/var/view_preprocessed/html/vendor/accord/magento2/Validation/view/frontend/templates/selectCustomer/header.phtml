@@ -1,0 +1,25 @@
+<?php /** * @var \Accord\Validation\Block\SelectCustomer\ListSelectCustomer $block * @var \Magento\Framework\View\TemplateEngine\Php $this */ ?> <script type="text/javascript">
+        // <![CDATA[
+        require([
+            'jquery'
+        ], function ($) {
+            window.customerCode = "<?=$block->getSelectedCustomerCode()?>";
+
+            
+            if (window.localStorage.getItem('window_customerCode') != window.customerCode) {
+                window.localStorage.setItem('window_customerCode', window.customerCode);
+                window.localStorage.clear(); 
+            }
+
+            
+            $(document).ready(function () {
+                $("#select_customer").change(function () {
+                    $("#select_customer_form").submit();
+                    $("#select_customer").attr('disabled', true);
+                    window.localStorage.clear();
+                    window.localStorage.setItem('window_customerCode', window.customerCode);
+                });
+            });
+        });
+        // ]]>
+</script><?php $selectedCustomerCode = $block->getSelectedCustomerCode(); ?> <?php if ($block->hasAccess() && $block->isShowDropDown()): ?> <li class="select_customer_form-wr"><form method="post" id="select_customer_form" action="/accordValidation/selectCustomer/select"><input type="hidden" name="url" value="<?= $block->getCurrentUrl() ?>"/><select id="select_customer" name="customer"><?php foreach ($block->getCustomers() as $customer): ?> <?php $name = $customer->shortName . ' (' . $customer->customerCode . ')'; $disabled = ''; if (!$customer->isExists) { $disabled = 'disabled="disabled"'; } ?> <?php if ($customer->customerCode == $selectedCustomerCode): ?> <option selected value="<?= $customer->customerCode ?>"><?= $name ?></option><?php else: ?> <option <?= $disabled ?> value="<?= $customer->customerCode ?>"><?= $name ?></option><?php endif; ?> <?php endforeach; ?></select> <div class="actions-toolbar" style="margin-top: 15px"><div class="primary"><button title="Save" class="action save primary" type="submit"><span>OK</span></button></div></div></form></li> <?php endif; ?>

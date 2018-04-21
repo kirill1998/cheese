@@ -1,0 +1,78 @@
+<table id="shopping-cart-table" class="cart items data table">
+    <tbody class="cart item">
+    <tr class="item-info">
+        <td data-th="Item" class="col item">
+            <a data-bind="attr: {href: productUrl}, htmlWithBinding: image" class="product-item-photo"></a>
+            <div class="product-item-details">
+                <strong class="product-item-name">
+                    <a href="https://am2.demohoster.com/uncle-bens-chinese-stir-fry-809866.html"
+                       data-bind="attr: {href: productUrl, title: name}, html: name"></a>
+                </strong>
+                <div class="product-item-details__list">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-item-details__label">Code</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-item-details__value" data-bind="text: sku"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-item-details__label">Pack Size</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-item-details__value" data-bind="html: packSize"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-item-details__label">Line Message</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-item-details__value line-message-link" data-bind="text: lineMessageModel().currentMessage()"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-item-details__label">Price</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-item-details__value" data-bind="html: getCalculatePrice()">?</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-item-details__label">Quantity</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-item-details__value"><span data-bind="text: qty"></span> <span data-bind="text: qtyTypeValue"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="item-actions">
+        <td colspan="100">
+            <div class="actions-toolbar">
+                <!--ko if: isAllowWishlist-->
+                <a data-bind="attr: {'data-post': wishlistPostData}"
+                   href="#"
+                   class="action towishlist" data-action="add-to-wishlist"
+                   title="Add to Wish List">
+                    <span>Move to Wishlist</span>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

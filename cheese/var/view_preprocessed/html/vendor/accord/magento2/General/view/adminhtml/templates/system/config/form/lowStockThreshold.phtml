@@ -1,0 +1,14 @@
+<?php /** * @var $block Accord\General\Block\Config\Form\ShowSpecialOffersToGuests */ ?> <input id="<?= $block->getData('html_id'); ?>" name="<?= $block->getData('name'); ?>" data-ui-id="text-groups-stock-fields-lowstockvalue-value" value="<?= $block->getData('value'); ?>" class=" <?= $block->getData('class'); ?>" type="text"><script>
+    (require([
+        'jquery', 
+        'jquery/ui', 
+        'jquery/validate', 
+        'mage/translate' 
+    ], function($){
+        $.validator.addMethod(
+            'validate-out-stock',
+            function (value) {
+
+                return !(parseInt(value) <= parseInt(jQuery('#accord_stock_stock_outStockValue').val()));
+            }, $.mage.__('Low Stock Threshold must be above Out of Stock Value'));
+    }));</script>

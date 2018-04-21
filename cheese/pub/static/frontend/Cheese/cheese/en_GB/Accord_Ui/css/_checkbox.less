@@ -1,0 +1,68 @@
+/*
+<span class="pretty-checkbox">
+	<label>
+		<input type="checkbox"/>
+			<span class="pretty-checkbox__box">
+				<i class="pretty-checkbox__box-icon fa fa-check"></i>
+			</span>
+		    text here
+	</label>
+</span>
+*/
+.pretty-checkbox {
+  label {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    font-weight: normal;
+    cursor: pointer;
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    input[type="checkbox"] {
+      display: none;
+      + .pretty-checkbox__box > .pretty-checkbox__box-icon {
+        opacity: 0;
+      }
+      &:checked + .pretty-checkbox__box > .pretty-checkbox__box-icon {
+        opacity: 1;
+      }
+      &:disabled + .pretty-checkbox__box {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.pretty-checkbox__box {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #a9a9a9;
+  border-radius: 0.25em;
+  width: 1.4em;
+  height: 1.4em;
+  margin-top: 0.05em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  margin-right: 0.5em;
+}
+
+.pretty-checkbox__box-icon {
+  position: absolute;
+  font-size: 0.8em;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.5em;
+  margin-left: -0.5em;
+}
+
+.pretty-checkbox__change-email {
+  label {
+    margin-bottom: 8px;
+  }
+}
